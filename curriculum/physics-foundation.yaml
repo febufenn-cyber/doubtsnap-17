@@ -1,0 +1,106 @@
+version: 0.1.0
+status: provisional
+curriculum: tamil_nadu_state_board
+grade: 11
+subject: physics
+opening_domain: mechanics
+
+concepts:
+  - id: units_and_measurement
+    prerequisites: []
+    problem_types:
+      - unit_conversion
+      - dimensional_analysis
+      - significant_figures
+  - id: motion_in_one_dimension
+    prerequisites: [units_and_measurement]
+    problem_types:
+      - average_velocity
+      - acceleration
+      - kinematic_equations
+      - motion_graphs
+  - id: motion_in_two_dimensions
+    prerequisites: [motion_in_one_dimension]
+    problem_types:
+      - vector_components
+      - projectile_motion
+      - relative_velocity
+  - id: laws_of_motion
+    prerequisites: [motion_in_one_dimension, motion_in_two_dimensions]
+    problem_types:
+      - free_body_diagram
+      - net_force
+      - friction
+      - connected_bodies
+      - inclined_plane
+  - id: work_energy_power
+    prerequisites: [laws_of_motion]
+    problem_types:
+      - work_by_constant_force
+      - kinetic_energy
+      - potential_energy
+      - conservation_of_energy
+      - power
+  - id: gravitation
+    prerequisites: [laws_of_motion, work_energy_power]
+    problem_types:
+      - gravitational_force
+      - field_and_potential
+      - orbital_motion
+
+misconceptions:
+  question_interpretation:
+    - cannot_identify_given_values
+    - cannot_identify_required_quantity
+    - ignores_diagram_information
+    - confuses_scalar_and_vector
+    - treats_context_word_as_irrelevant
+  formula_selection:
+    - chooses_equation_without_condition_check
+    - confuses_velocity_and_acceleration
+    - uses_mass_in_place_of_weight
+    - uses_applied_force_as_net_force
+    - applies_conservation_law_without_valid_conditions
+  diagram_reasoning:
+    - omits_force
+    - wrong_force_direction
+    - normal_force_always_equals_weight
+    - action_reaction_on_same_object
+    - friction_direction_error
+    - incorrect_vector_resolution
+  sign_conventions:
+    - changes_positive_direction_mid_solution
+    - negative_acceleration_confusion
+    - component_sign_error
+    - gravity_direction_error
+  units:
+    - km_per_hour_to_m_per_second
+    - grams_to_kilograms
+    - centimetres_to_metres
+    - missing_final_unit
+    - incompatible_compound_unit
+  algebra_and_arithmetic:
+    - rearrangement_error
+    - exponent_error
+    - division_error
+    - square_root_error
+    - significant_figure_error
+  conceptual:
+    - force_required_to_maintain_motion
+    - heavier_objects_fall_faster
+    - zero_velocity_means_zero_acceleration
+    - action_and_reaction_cancel
+    - constant_speed_always_means_no_forces
+
+language_invariants:
+  preserve_exactly:
+    - equations
+    - variable_symbols
+    - numerical_values
+    - units
+    - vector_direction
+    - official_exam_keywords
+  styles_under_test:
+    - english
+    - tamil
+    - tamil_english
