@@ -4,6 +4,23 @@
 
 **Alternative to the product-shape pioneered by Studdy (YC S23)** — rank #17 of 500 in the [YC-500 Fable 5 Venture Blueprint](https://github.com/) (score 7.05/10).
 
+## Current status
+
+Phase 0 product foundation is implemented on the Phase 0 branch. Start with [`PHASE_0.md`](PHASE_0.md).
+
+The repository now defines:
+
+- the provisional opening wedge and user hypotheses
+- the product constitution and unsupported scope
+- privacy, academic-integrity, and threat-model requirements
+- metrics, economics, go/pivot/stop criteria, and decision log
+- a Class 11 mechanics concept and misconception taxonomy
+- versioned Phase 0 JSON contracts
+- an original starter evaluation set
+- the strict boundary for the later Phase 1 truth engine
+
+Phase 0 is not considered validated until the real-user interviews, concierge sessions, benchmark expansion, generic-model baseline, language experiment, and cost measurements described in [`PHASE_0.md`](PHASE_0.md) are completed.
+
 ## Why this exists
 Snap-to-help is the highest-intent, most-viral homework behavior. The buildable wedge: snap-and-explain tutor for one subject with a follow-up quiz.
 
