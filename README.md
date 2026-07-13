@@ -6,54 +6,72 @@
 
 ## Current status
 
-Phase 0 product foundation is implemented on the Phase 0 branch. Start with [`PHASE_0.md`](PHASE_0.md).
+The **Phase 1 internal truth-engine foundation is implemented**. Start with [`PHASE_1.md`](PHASE_1.md), then read [`docs/phase-1-architecture.md`](docs/phase-1-architecture.md).
 
-The repository now defines:
+The repository now contains:
 
-- the provisional opening wedge and user hypotheses
-- the product constitution and unsupported scope
-- privacy, academic-integrity, and threat-model requirements
-- metrics, economics, go/pivot/stop criteria, and decision log
-- a Class 11 mechanics concept and misconception taxonomy
-- versioned Phase 0 JSON contracts
-- an original starter evaluation set
-- the strict boundary for the later Phase 1 truth engine
+- a Cloudflare Worker and Hono internal console
+- a gated image/text-to-teaching pipeline
+- versioned runtime contracts
+- deterministic run and item identifiers
+- mock and Anthropic provider adapters
+- critical-ambiguity and unsupported-scope stops
+- independent answer and unit comparison
+- misconception, teaching, and verified transfer stages
+- stage-level provider, model, prompt, latency, usage, and cost traces
+- automated tests, CI, and a starter plumbing evaluation
 
-Phase 0 is not considered validated until the real-user interviews, concierge sessions, benchmark expansion, generic-model baseline, language experiment, and cost measurements described in [`PHASE_0.md`](PHASE_0.md) are completed.
+Phase 1 is **implemented but not empirically validated**. The Phase 0 real-user research, benchmark expansion, real-model baselines, bilingual evaluation, and measured cost work remain required. The mock provider's starter result is not a model-accuracy claim.
+
+## Run locally
+
+```bash
+npm install
+npm run check
+npm run dev
+```
+
+The Worker defaults to `MODEL_PROVIDER=mock`. Copy `.dev.vars.example` to `.dev.vars` and configure your own provider secrets and model names to run the Anthropic adapter.
 
 ## Why this exists
-Snap-to-help is the highest-intent, most-viral homework behavior. The buildable wedge: snap-and-explain tutor for one subject with a follow-up quiz.
 
-## MVP scope
-- [ ] Photo capture
-- [ ] step explanation
-- [ ] concept recap
-- [ ] follow-up quiz
-- [ ] saved history
+Snap-to-help is a high-intent homework behavior. Doubtsnap's intended wedge is not answer generation alone: it reconstructs the problem, identifies the first broken reasoning step, gives the smallest useful intervention, verifies the solution, and checks transfer.
+
+## Current supported boundary
+
+- Tamil Nadu State Board hypothesis
+- Class 11 Physics
+- mechanics first
+- one printed or clearly handwritten English problem at a time
+- teaching variants in English, Tamil, or Tamil-English
+- internal evaluation use, not a public production service
+
+See [`PHASE_0.md`](PHASE_0.md) for the unresolved evidence gate and [`plans/phase-1-engine.md`](plans/phase-1-engine.md) for the implementation boundary.
 
 ## Architecture
-`Workers+Supabase+Claude vision` — Cloudflare Workers + Hono API, Supabase (Postgres + RLS + Auth + pgvector), Claude API via Agent SDK (claude-fable-5 for agent reasoning, claude-haiku-4-5 for volume), wrangler deploys.
 
-**Integrations:** Claude vision; Razorpay; push
-**Data:** Problem images, explanations, quiz results
-**Agent core:** Agent explains, then quizzes to convert copying into comprehension.
+`Cloudflare Workers + Hono + provider adapters` — the Phase 1 Worker exposes an internal UI and structured API. The Anthropic adapter uses the Messages API through standard `fetch`; provider model names and token pricing are environment configuration. Supabase, production authentication, billing, Razorpay, push notifications, and native applications remain intentionally excluded.
 
-## Business
+## MVP product scope
+
+- [ ] production photo capture
+- [x] internal image/text intake contract
+- [x] structured step explanation pipeline
+- [x] concept recap contract
+- [x] verified follow-up question pipeline
+- [ ] production saved history and learning memory
+- [ ] student-facing authentication and billing
+
+## Business hypothesis
+
 | | |
 |---|---|
-| Monetization | Freemium; 149 INR/mo |
-| First customer | High-school physics/chem students |
-| GTM wedge | Free snaps; SEO and TikTok study demos; referral unlocks. |
-| Competition risk | High: Studdy, Photomath, many |
-| Regulatory/trust risk | High: stores minors' homework photos and quiz history (education/PII data, COPPA territory) plus academic-integrity exposure |
-| India angle | Board-syllabus physics/chemistry help in English + Hindi explanations. |
-| Difficulty / build time | Low / 2-3 weeks |
-
-## 30-day plan
-- **W1:** core loop — Photo capture + step explanation
-- **W2:** concept recap + follow-up quiz + saved history + auth + billing
-- **W3:** polish, instrument events, seed first users via: Free snaps; SEO and TikTok study demos; referral unlocks.
-- **W4:** launch + first revenue; kill/scale decision
+| Monetization | Freemium; ₹149/month remains a modeling hypothesis |
+| First customer | High-school physics students; opening wedge still requires validation |
+| GTM wedge | Free snaps, syllabus SEO, study demos, and referrals remain untested |
+| Competition risk | High: generic multimodal assistants and specialist homework tools |
+| Regulatory/trust risk | High: minors' education data, images, academic integrity, and confident model error |
+| India angle | Curriculum-specific physics help with tested English/Tamil/Tamil-English teaching |
 
 ---
-*Built with Fable 5 (Claude Code). Blueprint row: inspired by Studdy — "AI tutor: snap a photo for instant help across subjects."*
+*Built from the Fable 5 venture blueprint. Product inspiration: a visual AI tutor that turns homework help into verified comprehension.*

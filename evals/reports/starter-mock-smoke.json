@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-07-13T10:17:57.783Z",
+  "purpose": "Pipeline plumbing smoke test using the deterministic mock provider; not a model-accuracy claim.",
+  "provider": "mock",
+  "pipelineVersion": "phase1-0.1.0",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {"id":"tn11_lom_001","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_72df694cb7264869d942","durationMs":27.33996300000001},
+    {"id":"tn11_lom_002","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_bbba0195a59047daa5a6","durationMs":1.9181899999999814},
+    {"id":"tn11_motion_001","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_b0ffa5bb7c8704283e01","durationMs":1.147457999999915},
+    {"id":"tn11_units_001","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_e55bea513b0c8ba6aa73","durationMs":0.9452770000000328},
+    {"id":"tn11_lom_ambiguous_001","expectedStatus":"clarification_required","actualStatus":"clarification_required","statusPass":true,"answerPass":true,"runId":"run_6c726f8498e2d9237837","durationMs":0.9921249999999873},
+    {"id":"tn11_lom_work_001","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_704a36c6c088e8a674f8","durationMs":0.7619510000000673},
+    {"id":"tn11_motion_graph_001","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_546546db102735a58e61","durationMs":0.827083000000016},
+    {"id":"tn11_energy_001","expectedStatus":"complete","actualStatus":"complete","statusPass":true,"answerPass":true,"runId":"run_252aa76fae1ad61e67cf","durationMs":0.8721320000000787}
+  ]
+}
