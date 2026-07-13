@@ -1,0 +1,11 @@
+MODEL_PROVIDER=anthropic
+ANTHROPIC_API_KEY=replace-me
+ANTHROPIC_API_URL=https://api.anthropic.com/v1/messages
+ANTHROPIC_VERSION=2023-06-01
+ANTHROPIC_VISION_MODEL=replace-with-a-vision-capable-model
+ANTHROPIC_REASONING_MODEL=replace-with-a-reasoning-model
+ANTHROPIC_TUTOR_MODEL=replace-with-a-tutor-model
+ANTHROPIC_INPUT_USD_PER_MTOK=
+ANTHROPIC_OUTPUT_USD_PER_MTOK=
+MAX_IMAGE_BYTES=10000000
+PIPELINE_VERSION=phase1-0.1.0

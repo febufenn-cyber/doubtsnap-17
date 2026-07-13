@@ -1,0 +1,27 @@
+{
+  "name": "doubtsnap-truth-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "eval:starter": "tsx scripts/evaluate-starter.ts",
+    "check": "npm run typecheck && npm test && npm run eval:starter"
+  },
+  "dependencies": {
+    "hono": "4.12.30",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260713.1",
+    "@types/node": "^26.1.1",
+    "tsx": "4.23.1",
+    "typescript": "5.8.3",
+    "vitest": "4.1.10",
+    "wrangler": "4.110.0"
+  }
+}
