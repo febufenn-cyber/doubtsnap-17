@@ -1,6 +1,6 @@
 {
   "name": "doubtsnap-truth-engine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,11 +10,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "eval:starter": "tsx scripts/evaluate-starter.ts",
-    "check": "npm run typecheck && npm test && npm run eval:starter"
+    "check": "npm run typecheck && npm test && npm run eval:starter && npm run eval:phase2",
+    "eval:phase2": "tsx scripts/evaluate-validation-lab.ts",
+    "normalize:image": "tsx scripts/normalize-image.ts"
   },
   "dependencies": {
     "hono": "4.12.30",
-    "zod": "4.4.3"
+    "zod": "4.4.3",
+    "sharp": "0.34.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20260713.1",
