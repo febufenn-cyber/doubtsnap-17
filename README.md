@@ -23,6 +23,21 @@ The repository now contains:
 
 Phase 1 is **implemented but not empirically validated**. The Phase 0 real-user research, benchmark expansion, real-model baselines, bilingual evaluation, and measured cost work remain required. The mock provider's starter result is not a model-accuracy claim.
 
+## Remaining roadmap
+
+Six phases remain after Phase 1:
+
+1. Phase 2 — Validation Lab
+2. Phase 3 — Student MVP
+3. Phase 4 — Learning Memory and Personalization
+4. Phase 5 — Production Trust, Security, and Reliability
+5. Phase 6 — Monetization and Controlled Beta
+6. Phase 7 — Distribution, Expansion, and Platform Readiness
+
+Read [`ROADMAP.md`](ROADMAP.md) for the dependency chain and [`BUILD_PROTOCOL.md`](BUILD_PROTOCOL.md) for the binding autonomous implementation, validation, Git push, pull request, merge, and post-merge confirmation process.
+
+When the user says **`build`**, the next eligible phase is selected from the committed roadmap, implemented on a feature branch, validated, pushed, merged into `main`, and verified according to the build protocol. One plain `build` instruction builds one phase.
+
 ## Run locally
 
 ```bash
@@ -50,7 +65,7 @@ See [`PHASE_0.md`](PHASE_0.md) for the unresolved evidence gate and [`plans/phas
 
 ## Architecture
 
-`Cloudflare Workers + Hono + provider adapters` — the Phase 1 Worker exposes an internal UI and structured API. The Anthropic adapter uses the Messages API through standard `fetch`; provider model names and token pricing are environment configuration. Supabase, production authentication, billing, Razorpay, push notifications, and native applications remain intentionally excluded.
+`Cloudflare Workers + Hono + provider adapters` — the Phase 1 Worker exposes an internal UI and structured API. The Anthropic adapter uses the Messages API through standard `fetch`; provider model names and token pricing are environment configuration. Supabase, production authentication, billing, Razorpay, push notifications, and native applications remain intentionally excluded from Phase 1 and are introduced only by their committed later-phase gates.
 
 ## MVP product scope
 
