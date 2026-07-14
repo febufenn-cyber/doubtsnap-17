@@ -1,191 +1,174 @@
 ---
 phase: 2
 name: Validation Lab
-status: planned
+status: implemented_pending_validation
 depends_on: [1]
+started_from_main: 340d923ad2da0fe36372a0922bbf07e4d8e27e23
 branch: agent/phase-2-validation-lab
-implementation_commit: Implement Phase 2 validation lab
+implementation_commit: db227fe4e5494a3f299223994882d13685727d98
 pr_title: Implement Phase 2 validation lab
+validation:
+  passed:
+    - strict_typecheck
+    - 23_automated_tests
+    - phase1_regression_suite
+    - starter_mock_8_of_8
+    - phase2_batch_8_items
+    - calculators_6_agreements_0_disagreements
+    - wrangler_dry_run
+    - npm_audit_zero
+    - secret_scan_clean
+  pending:
+    - human_verified_100_item_benchmark
+    - real_image_corpus
+    - live_provider_cost_latency
+    - bilingual_human_review
+    - evidence_thresholds
 ---
 
 # Phase 2 — Validation Lab
 
 ## Objective
 
-Turn the Phase 1 truth-engine foundation into a persistent, human-reviewable, batch-measurable reliability system. Phase 2 must reveal exactly where image intake, transcription, solving, verification, diagnosis, teaching, or transfer generation fails.
+Turn the Phase 1 truth-engine foundation into a persistent, human-reviewable and batch-measurable reliability system. It must reveal whether failure occurred during image intake, transcription, solving, verification, diagnosis, teaching or transfer generation.
 
-This phase is successful when Doubtsnap can run a versioned benchmark across provider configurations, store every trace, accept human corrections, and generate reproducible S0–S4 reports.
-
-## Strategic reason
-
-The current engine proves orchestration, not truth. Building a student UI now would amplify unknown errors. Phase 2 converts model behavior into evidence that can support or reject the product thesis.
-
-## Included scope
+## Implemented scope
 
 ### Image normalization
 
-- decode supported image formats safely
-- strip EXIF and unnecessary metadata
-- normalize orientation
-- resize within configurable limits while preserving readable detail
-- calculate basic blur, contrast, glare, crop, and resolution signals
-- preserve original hash and normalized-image hash
-- represent uncertainty regions with image coordinates
-- prevent normalized images from silently changing mathematical content
+- safe decode and byte/pixel limits
+- EXIF orientation normalization
+- resize without enlargement
+- clean re-encoding and metadata removal
+- original and normalized SHA-256 hashes
+- blur, contrast, glare, border and resolution signals
+- normalized uncertainty-coordinate contract
+- corrupt, oversized, animated and multi-page rejection
+
+The normalizer is a Node ingestion component and CLI. It is deliberately not bundled into the Cloudflare Worker native runtime.
 
 ### Persistence
 
-Introduce repository interfaces and durable implementations for:
+Repository abstractions and implementations now cover:
 
-- truth-engine runs
-- stage traces
+- validation runs and all Phase 1 traces
 - normalized image metadata
 - benchmark items and versions
-- provider/model configurations without secrets
-- human evaluator labels
-- transcription corrections
-- expected and observed S0–S4 failures
-- cost and latency measurements
+- provider configuration identifiers without secrets
+- append-only human evaluator events
+- corrections and S0–S4 labels
+- batch manifests
+- cost and latency data
 
-Use test repositories for deterministic CI. Production-capable storage should follow the existing Worker/Supabase direction without hard-coding credentials.
+The memory adapter supports deterministic CI. The Supabase adapter is backed by a versioned migration with RLS enabled and no public policies.
+
+### Image retention
+
+- raw bytes are redacted by default
+- storage is opt-in through `LAB_STORE_RAW_IMAGES=true`
+- retained bytes receive a configurable expiry
+- purge removes source and normalized bytes while preserving non-sensitive evidence
+- normalized images never overwrite original inputs
 
 ### Human evaluation console
 
-Extend the internal console to support:
-
-- run search and filtering
-- side-by-side source and normalized image inspection
-- uncertainty-region highlighting
-- correction of transcription, quantities, units, topic, method, answer, and misconception
-- evaluator severity and notes
-- accept/reject per stage
-- audit history rather than destructive overwrite
-- export of corrected benchmark records
+`/lab` provides run search, status/topic filters, source/normalized image panels, uncertainty regions, structured trace inspection, stage decisions, severity labels, notes and corrected-record export. Evaluation history is append-only.
 
 ### Batch benchmark runner
 
-- execute JSONL benchmark sets
-- select provider/model/prompt configurations
-- concurrency and rate limits
-- resumable runs
-- deterministic run manifests
-- per-item and aggregate reports
-- comparison against prior benchmark versions
-- failure clustering by topic, image quality, and stage
+- deterministic manifests
+- benchmark/provider/prompt versioning
+- bounded concurrency
+- resumable and idempotent processing
+- per-item attempts and errors
+- aggregate comparison-ready reports
 
-### Deterministic verification
+### Deterministic mechanics calculators
 
-Add calculator modules for the highest-volume supported families, beginning with:
+Implemented families:
 
 - unit conversion
 - uniform acceleration
-- one-dimensional kinematics
-- net force and Newton’s second law
-- work, kinetic energy, and power
-- simple graph-area questions
+- net force and Newton's second law
+- kinetic energy
+- rectangular velocity-time graph area
 
-Each calculator must declare its supported assumptions and refuse unsupported forms.
+Each module declares assumptions and refuses unmatched forms. A disagreement blocks teaching and transfer output.
 
 ### Evaluation reports
 
-Generate reports for:
+Fixture reports include:
 
-- critical-field transcription accuracy
-- clarification precision/recall
-- topic classification
-- canonical-method validity
-- value, sign, and unit accuracy
-- solver/verifier disagreement
-- high-confidence S3 error rate
-- S4 count
-- diagnosis agreement
-- teaching-language preservation
-- transfer-answer correctness
-- latency and estimated cost distributions
+- run status counts
+- S0–S4 counts
+- high-confidence S3 count
+- calculator support/agreement/disagreement
+- p50, p95 and max latency
+- total and percentile estimated cost
+- failure clusters by stage, topic and severity
+- explicit evidence-class limitations
 
 ## Explicit exclusions
 
 - public student application
 - production billing
 - parent or teacher dashboards
-- broad chemistry or mathematics support
+- chemistry or broad mathematics support
 - forced sign-in
-- claims of accuracy from synthetic or mock data
-- silent auto-correction of uncertain mathematical content
+- accuracy claims from mock or synthetic data
+- silent mathematical auto-correction
 
-## Data and migration requirements
+## Technical merge gate
 
-- migrations must be versioned and reproducible
-- every mutable evaluation record must preserve audit history
-- secrets must never be stored in benchmark configuration records
-- raw images must have a configurable retention policy
-- deleted benchmark images must leave non-sensitive hashes and audit events only when policy permits
-- repository interfaces must allow tests without external services
+Satisfied by the implementation:
 
-## Required automated checks
+- deterministic and tested normalization
+- repository adapters and migration
+- auditable corrections
+- resumable batch manifests
+- at least three calculator families; five are implemented
+- S0–S4 fixture reports
+- unchanged Phase 1 ambiguity and verification gates
+- raw-image minimization and expiry tests
 
-- image metadata removal tests
-- orientation and resize tests
-- corrupt/oversized image rejection
-- uncertainty-coordinate contract tests
-- persistence repository tests
-- migration tests
-- evaluator audit-history tests
-- batch resume/idempotency tests
-- calculator unit and property tests
-- report aggregation tests
-- existing Phase 1 gate regression tests
-- `npm run check`
-- Wrangler dry-run
+## Evidence gate for `complete`
 
-## Acceptance gate
+Still pending:
 
-### Technical merge gate
-
-The phase may be merged as `implemented_pending_validation` when:
-
-- image normalization is deterministic and tested
-- durable repository adapters and migrations exist
-- evaluator corrections are auditable
-- batch runs are resumable and reproducible
-- at least three deterministic calculator families are integrated
-- S0–S4 reports are generated from fixtures
-- no existing ambiguity or verification gate is weakened
-
-### Evidence gate for `complete`
-
-- at least 100 legally usable, human-verified benchmark items
-- at least 30 real images across clear, handwritten, diagram, and poor-quality categories
-- zero unresolved S4 failures in the supported benchmark
+- 100+ legally usable human-verified benchmark items
+- 30+ real images across clear, handwritten, diagram and poor-quality categories
+- zero unresolved S4 failures
 - zero high-confidence invented critical fields
 - at least 95% critical-field accuracy on clear printed items
-- at least 90% verified final value-and-unit accuracy for explicitly supported deterministic families
-- clarification triggered for all benchmark items whose answer materially depends on unreadable data
-- measured latency and cost report for configured live providers
-- human review of English, Tamil, and Tamil-English preservation on a representative sample
+- at least 90% verified final value-and-unit accuracy for enabled deterministic families
+- clarification on every materially unreadable benchmark item
+- measured live-provider latency and cost
+- human English, Tamil and Tamil-English preservation review
 
-Thresholds are provisional and must be tightened or documented after evidence review; they must not be weakened merely to enter Phase 3.
+These thresholds must not be weakened simply to begin Phase 3.
 
 ## Deliverables
 
-- image normalization module
-- persistence repositories and migrations
-- human evaluator console
-- batch benchmark CLI/API
-- deterministic mechanics calculators
-- comparison and severity reports
-- expanded tests and CI
-- updated `PHASE_2.md` or equivalent implementation report
-- updated README and roadmap status
+- `src/lab/image-normalizer.ts`
+- `src/lab/repository.ts`
+- `src/lab/service.ts`
+- `src/lab/batch.ts`
+- `src/lab/calculators.ts`
+- `src/lab/reporting.ts`
+- `src/lab/contracts.ts`
+- `src/ui/validation-lab.ts`
+- `supabase/migrations/202607140001_validation_lab.sql`
+- Phase 2 scripts, tests and fixture report
+- `PHASE_2.md`
 
-## Rollback and failure policy
+## Rollback and repair
 
-- storage migrations need forward-repair instructions
-- batch-run writes must be idempotent
-- original images must never be overwritten by normalized versions
-- a calculator disagreement blocks downstream teaching rather than being averaged away
-- any discovered S4 becomes a committed regression test before merge or a documented merge blocker
+- migration forward-repair guidance is in `docs/phase-2-migration-repair.md`
+- all batch writes are idempotent by manifest ID
+- original image records are never overwritten by normalization
+- calculator disagreement blocks downstream teaching
+- every future S4 must become a committed regression test or a merge blocker
 
 ## Next-phase entry
 
-Phase 3 may start only after the Phase 2 technical implementation is merged and the selected student-facing problem families have passed the documented benchmark gate. Unvalidated problem families must remain hidden behind feature flags or unsupported-scope responses.
+Phase 3 can be implemented technically after this phase is merged, but student-visible problem families remain gated by real Phase 2 benchmark evidence. The repository must continue to describe Phase 2 as `implemented_pending_validation` until the evidence gate passes.

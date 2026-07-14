@@ -4,13 +4,13 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-07-13",
   "workers_dev": true,
-  "observability": {
-    "enabled": true,
-    "head_sampling_rate": 0.1
-  },
+  "observability": { "enabled": true, "head_sampling_rate": 0.1 },
   "vars": {
     "MODEL_PROVIDER": "mock",
-    "PIPELINE_VERSION": "phase1-0.1.0",
-    "MAX_IMAGE_BYTES": "10000000"
-  }
+    "PIPELINE_VERSION": "phase2-0.1.0",
+    "MAX_IMAGE_BYTES": "10000000",
+    "LAB_REPOSITORY": "memory",
+    "LAB_STORE_RAW_IMAGES": "false",
+    "RAW_IMAGE_RETENTION_HOURS": "24",
+  },
 }

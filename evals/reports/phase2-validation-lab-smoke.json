@@ -1,0 +1,108 @@
+{
+  "purpose": "Phase 2 deterministic validation-lab plumbing report; not a live-model accuracy claim.",
+  "manifest": {
+    "schemaVersion": "phase2-lab-0.1.0",
+    "manifestId": "batch_4fc3b332bfd85e401618",
+    "benchmarkVersion": "starter-v1",
+    "providerConfigId": "mock-local",
+    "promptSetVersion": "phase2-mock",
+    "createdAt": "2026-07-14T06:01:00.054Z",
+    "updatedAt": "2026-07-14T06:01:00.071Z",
+    "status": "complete",
+    "concurrency": 3,
+    "items": [
+      {
+        "itemId": "tn11_lom_001",
+        "status": "complete",
+        "runId": "run_994b387a8ae3b375efd0",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_lom_002",
+        "status": "complete",
+        "runId": "run_b8c5d0cd1812f53078a8",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_motion_001",
+        "status": "complete",
+        "runId": "run_eed359fa6b99a975e4f6",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_units_001",
+        "status": "complete",
+        "runId": "run_78288f6620ca050dcf60",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_lom_ambiguous_001",
+        "status": "complete",
+        "runId": "run_5997bfa4aec08399b732",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_lom_work_001",
+        "status": "complete",
+        "runId": "run_6bab4d583dfce79b5ab3",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_motion_graph_001",
+        "status": "complete",
+        "runId": "run_78b88e6d70cbd9185935",
+        "error": null,
+        "attempts": 1
+      },
+      {
+        "itemId": "tn11_energy_001",
+        "status": "complete",
+        "runId": "run_b0c0ee8fc5292466a0a7",
+        "error": null,
+        "attempts": 1
+      }
+    ]
+  },
+  "report": {
+    "schemaVersion": "phase2-lab-0.1.0",
+    "generatedAt": "2026-07-14T06:01:00.072Z",
+    "evidenceClass": "mock",
+    "totals": {
+      "runs": 8,
+      "evaluations": 0,
+      "s4": 0,
+      "highConfidenceS3": 0
+    },
+    "statusCounts": {
+      "complete": 7,
+      "clarification_required": 1
+    },
+    "severityCounts": {},
+    "calculator": {
+      "supported": 6,
+      "agreements": 6,
+      "disagreements": 0
+    },
+    "latencyMs": {
+      "p50": 2.1476220000000126,
+      "p95": 8.755132000000003,
+      "max": 8.755132000000003
+    },
+    "estimatedCostUsd": {
+      "total": 0,
+      "p50": 0,
+      "p95": 0
+    },
+    "clusters": [],
+    "limitations": [
+      "This report does not represent a legally usable human-verified production benchmark.",
+      "Metrics depend on evaluator coverage and configured providers."
+    ]
+  }
+}
